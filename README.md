@@ -11,9 +11,4 @@ This repository is a starter scaffold for building a Codex-backed iSite research
 - core evidence / validation / proxy standardization modules
 - test scaffolding
 
-## Remote unit terminology
 
-- **pRRU**: pure indoor environments
-- **hRRU**: semi-open environments
-
-Use **DIS** as the standard term instead of `digital DAS`.
