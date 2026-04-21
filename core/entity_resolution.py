@@ -1,83 +1,64 @@
 from __future__ import annotations
 
-from typing import Iterable, List, Protocol
+import re
+import unicodedata
+from typing import Iterable, List
 
 from .schemas import ResolvedEntity
 
 
-class EntityResolutionAdapter(Protocol):
-    """Abstract source adapter for future resolver integrations."""
-
-    def fetch_candidates(
-        self,
-        name: str,
-        city: str | None = None,
-        country: str | None = None,
-    ) -> list[dict]:
-        """Return candidate entity records from an external source."""
-
-
 def normalize_name(name: str) -> str:
-    normalized = " ".join((name or "").strip().split())
-    return normalized
+    value = unicodedata.normalize('NFKC', name or '')
+    value = ' '.join(value.strip().split())
+    return value
 
 
-def _unique_normalized(values: Iterable[str]) -> List[str]:
-    seen = []
-    for raw in values:
+def ascii_fold(value: str) -> str:
+    normalized = unicodedata.normalize('NFKD', value)
+    return ''.join(ch for ch in normalized if not unicodedata.combining(ch))
+
+
+def canonical_key(name: str) -> str:
+    base = ascii_fold(normalize_name(name)).lower()
+    base = re.sub(r'[^a-z0-9]+', ' ', base)
+    return ' '.join(base.split())
+
+
+def extract_aliases(*names: str) -> List[str]:
+    aliases: List[str] = []
+    seen = set()
+    for raw in names:
         if not raw:
             continue
         value = normalize_name(raw)
-        if value not in seen:
-            seen.append(value)
-    return seen
-
-
-def extract_aliases(
-    standardized_property_name: str,
-    alias_names: Iterable[str] | None = None,
-    local_language_names: Iterable[str] | None = None,
-) -> List[str]:
-    return _unique_normalized(
-        [
-            standardized_property_name,
-            *(alias_names or []),
-            *(local_language_names or []),
-        ]
-    )
-
-
-def extract_local_language_names(
-    local_language_names: Iterable[str] | None = None,
-) -> List[str]:
-    return _unique_normalized(local_language_names or [])
+        key = canonical_key(value)
+        if key and key not in seen:
+            aliases.append(value)
+            seen.add(key)
+    return aliases
 
 
 def detect_ambiguity(candidates: Iterable[str]) -> str | None:
-    values = [normalize_name(x).lower() for x in candidates if x]
-    return "possible_same_name_conflict" if len(set(values)) > 1 else None
+    keys = [canonical_key(x) for x in candidates if x]
+    if not keys:
+        return None
+    return 'possible_same_name_conflict' if len(set(keys)) > 1 else None
 
 
 def resolve_entity(
     standardized_property_name: str,
     alias_names: Iterable[str] | None = None,
-    local_language_names: Iterable[str] | None = None,
     city: str | None = None,
     country: str | None = None,
+    coordinates: str | None = None,
 ) -> ResolvedEntity:
-    normalized_name = normalize_name(standardized_property_name)
-    aliases = extract_aliases(
-        normalized_name,
-        alias_names=alias_names,
-        local_language_names=local_language_names,
-    )
-    local_names = extract_local_language_names(local_language_names)
+    aliases = extract_aliases(standardized_property_name, *(alias_names or []))
     ambiguity = detect_ambiguity(aliases)
     return ResolvedEntity(
-        standardized_property_name=normalized_name,
+        standardized_property_name=normalize_name(standardized_property_name),
         alias_names=aliases,
-        local_language_names=local_names,
         city=normalize_name(city) if city else None,
         country=normalize_name(country) if country else None,
+        coordinates=coordinates,
         ambiguity_notes=ambiguity,
     )
