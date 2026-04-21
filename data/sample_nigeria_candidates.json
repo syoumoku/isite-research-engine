@@ -1,0 +1,49 @@
+{
+  "country": "Nigeria",
+  "candidates": [
+    {
+      "name": "Murtala Muhammed International Airport",
+      "aliases": ["MMIA Lagos"],
+      "city": "Lagos",
+      "country": "Nigeria",
+      "property_category": "airport",
+      "secondary_category": "transport_hub",
+      "scene_hints": ["arrival_zone"],
+      "dis_recommendation": "recommended",
+      "recommendation_reason": "National gateway airport with high indoor concurrency and multi-operator value.",
+      "entity_resolution_basis": "Airport identity and city context confirmed from candidate input and public-source planning research.",
+      "classification_basis": "Airport with indoor terminal plus semi-open arrival edge.",
+      "heat_signal_basis": "High passenger throughput and gateway prominence.",
+      "macro_context_basis": "Lagos is Nigeria's main commercial and international gateway city.",
+      "proxy_level": "mixed_proxy",
+      "proxy_anchor": "gateway airport pattern plus Nigeria country scan",
+      "proxy_stretch": "low",
+      "source_records": [
+        {"name": "Murtala Muhammed International Airport", "city": "Lagos", "type": "airport"},
+        {"name": "MMIA Lagos", "city": "Lagos", "type": "airport"}
+      ]
+    },
+    {
+      "name": "Eko Hotels & Convention Centre",
+      "aliases": ["Eko Hotel Lagos"],
+      "city": "Lagos",
+      "country": "Nigeria",
+      "property_category": "hotel",
+      "secondary_category": "convention",
+      "scene_hints": ["portico"],
+      "dis_recommendation": "recommended",
+      "recommendation_reason": "Large premium hotel and convention complex with high event-driven indoor demand.",
+      "entity_resolution_basis": "Hotel and convention complex identity normalized from planning input.",
+      "classification_basis": "Premium hospitality plus convention scenario.",
+      "heat_signal_basis": "Strong event and premium-user signal.",
+      "macro_context_basis": "Victoria Island is a high-value Lagos business and hospitality zone.",
+      "proxy_level": "same_category_proxy",
+      "proxy_anchor": "regional premium hotel and convention pattern",
+      "proxy_stretch": "medium",
+      "source_records": [
+        {"name": "Eko Hotels & Convention Centre", "city": "Lagos", "type": "hotel"},
+        {"name": "Eko Hotel Lagos", "city": "Lagos", "type": "hotel"}
+      ]
+    }
+  ]
+}
