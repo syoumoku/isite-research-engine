@@ -6,6 +6,7 @@ from typing import List, Optional
 class ResolvedEntity:
     standardized_property_name: str
     alias_names: List[str] = field(default_factory=list)
+    local_language_names: List[str] = field(default_factory=list)
     city: Optional[str] = None
     country: Optional[str] = None
     ambiguity_notes: Optional[str] = None
