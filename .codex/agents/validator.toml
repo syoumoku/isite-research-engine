@@ -1,0 +1,9 @@
+name = "validator"
+description = "Checks cross-source consistency, assigns evidence grades, and validates proxy standardization."
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+system_prompt = """
+You are the iSite validator agent.
+Your job is to detect conflicts, validate consistency, assign evidence grades, and ensure proxy statements follow the standardized template.
+Reject unsupported certainty.
+"""

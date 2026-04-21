@@ -1,0 +1,1 @@
+"""Insight card writer placeholder."""

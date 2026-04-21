@@ -1,0 +1,35 @@
+default_country_scan:
+  minimum_recommended_properties: 10
+  preferred_categories:
+    - airport
+    - mall
+    - office
+    - hotel
+    - convention
+
+country_profiles:
+  portal:
+    emphasize:
+      - airport
+      - hotel
+      - convention
+  tourism:
+    emphasize:
+      - airport
+      - hotel
+      - mall
+  hq_capital:
+    emphasize:
+      - office
+      - mixed_use
+      - hotel
+  resource:
+    emphasize:
+      - office
+      - hotel
+      - transport_hub
+  multi_core:
+    emphasize:
+      - airport
+      - office
+      - mall

@@ -1,0 +1,1 @@
+"""Excel output writer placeholder."""

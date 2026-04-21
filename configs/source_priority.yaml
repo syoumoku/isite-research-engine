@@ -1,0 +1,21 @@
+entity_resolution:
+  - osm_nominatim
+  - overture
+  - geonames
+  - wikidata
+
+classification:
+  - overpass
+  - overture
+  - wikidata
+  - wikipedia
+
+heat_signals:
+  - google_places
+  - tripadvisor
+  - osm_surroundings
+
+macro_context:
+  - world_bank
+  - geonames
+  - wikidata

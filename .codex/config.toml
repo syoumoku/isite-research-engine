@@ -1,0 +1,7 @@
+profile = "isite"
+
+[profiles.isite]
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+approval_policy = "untrusted"
+sandbox_mode = "workspace-write"

@@ -1,0 +1,37 @@
+dimensions:
+  - property_value
+  - traffic_capacity
+  - premium_user_value
+  - engineering_fit
+  - strategic_value
+
+dis_hard_triggers:
+  - multi_operator_sharing
+  - high_indoor_concurrency
+  - complex_built_form
+  - premium_user_concentration
+  - portal_effect
+
+dis_soft_triggers:
+  - top_property_in_city_or_country
+  - likely_upgrade_need
+  - long_term_scalability_benefit
+
+remote_unit_selection:
+  pRRU:
+    use_for:
+      - enclosed_mall
+      - office_tower
+      - hotel
+      - convention_hall
+      - indoor_venue
+      - underground_retail
+      - indoor_transport_concourse
+  hRRU:
+    use_for:
+      - open_sided_canopy
+      - arrival_zone
+      - drop_off_zone
+      - portico
+      - semi_open_corridor
+      - outdoor_connected_podium_edge

@@ -1,0 +1,8 @@
+standard_proxy_basis_template: "Direct evidence: {direct_evidence} | Inference: {inference} | Proxy anchor: {proxy_anchor} | Stretch: {stretch}"
+
+proxy_levels:
+  - direct
+  - same_category_proxy
+  - city_proxy
+  - country_proxy
+  - mixed_proxy
